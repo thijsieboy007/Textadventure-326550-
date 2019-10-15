@@ -15,6 +15,9 @@ public class MyAdventure : MonoBehaviour
         ervanweg,
         onderzoeken,
         weg,
+        leven,
+        dood,
+        eind,
     }
 
 
@@ -40,11 +43,6 @@ public class MyAdventure : MonoBehaviour
                 if (input == "start")
                 {
                     StartIntro();
-                }
-                else if (input == "1337")
-                {
-                    Terminal.ClearScreen();
-                    Terminal.WriteLine("leet!");
                 }
                 else
                 {
@@ -130,7 +128,84 @@ public class MyAdventure : MonoBehaviour
             {
                 if (input == "onderzoeken")
                 {
-                    
+                    onderzoeken();
+                }
+                
+                else if (input == "weg")
+                {
+                    weg();
+                }
+                else
+                {
+                    ervanweg();
+                }
+            }
+                break;
+
+            case States.onderzoeken:
+            {
+                if (input == "menu")
+                {
+                    ShowMainMenu();
+                }
+                else
+                {
+                    onderzoeken();
+                }
+            }
+                break;
+            case States.weg:
+            {
+                if (input == "leven")
+                {
+                    leven();
+                }
+                else if (input == "dood")
+                {
+                    dood();
+                }
+                else
+                {
+                    weg();
+                }
+            }
+                break;
+            
+            case States.leven:
+            {
+                if (input == "menu")
+                {
+                    ShowMainMenu();
+                }
+                else
+                {
+                    leven();
+                }
+            } 
+                break;
+
+            case States.dood:
+            {
+                if (input == "verder")
+                {
+                    eind();
+                }
+                else
+                {
+                    dood();
+                }
+            }
+                break;
+
+            case States.eind:
+            {
+                if (input == "menu")
+                {
+                    ShowMainMenu();
+                }
+                else
+                {
+                    eind();
                 }
             }
                 break;
@@ -139,7 +214,8 @@ public class MyAdventure : MonoBehaviour
     void ShowMainMenu()
     {
         Terminal.ClearScreen();
-        Terminal.WriteLine("type 'start' om te beginnen...");
+        Terminal.WriteLine("type 'START' om te beginnen...");
+        currentState = States.start;
     }
 
     void StartIntro()
@@ -149,7 +225,7 @@ public class MyAdventure : MonoBehaviour
         Terminal.WriteLine("met alleen een rugzak met een zaklamp");
         Terminal.WriteLine("en een halve liter fles water erin.");
         Terminal.WriteLine("je doet de zaklamp aan en je ziet muren om je heen. Je zit in een doolhof!");
-        Terminal.WriteLine("type verder om verder te gaan....");
+        Terminal.WriteLine("type 'VERDER' om verder te gaan....");
         currentState = States.intro;
     }
 
@@ -158,7 +234,8 @@ public class MyAdventure : MonoBehaviour
         Terminal.ClearScreen();
         Terminal.WriteLine("Je bent aan het lopen en het lijkt alsof je maar niet verder komt.");
         Terminal.WriteLine("Uiteindelijk kun je naar rechts of links.");
-        Terminal.WriteLine("Typ RECHTS of LINKS om naar rechts of links te gaan...");
+        Terminal.WriteLine("Typ 'RECHTS' of 'LINKS'");
+        Terminal.WriteLine("om naar rechts of links te gaan...");
         currentState = States.verder;
     }
 
@@ -167,7 +244,8 @@ public class MyAdventure : MonoBehaviour
         Terminal.ClearScreen();
         Terminal.WriteLine("Je gaat naar rechts en je blijf lopen.");
         Terminal.WriteLine("Na een tijdje lopen hoor je een hard geluid.");
-        Terminal.WriteLine("Type EROPAF om eropaf te gaan of ERVANWEG om ervan weg te gaan... ");
+        Terminal.WriteLine("Typ 'EROPAF' om eropaf te gaan...");
+        Terminal.WriteLine("Typ 'ERVANWEG' om ervan weg te gaan...");
         currentState = States.rechts;
     }
 
@@ -177,7 +255,7 @@ public class MyAdventure : MonoBehaviour
         Terminal.WriteLine("Je ziet een figuur in de verte.");
         Terminal.WriteLine("Het komt met een hoog tempo op je af. het is te snel en je kan er niet van ontsnappen.");
         Terminal.WriteLine("Het beest verslint je");
-        Terminal.WriteLine("Typ MENU om naar het menu te gaan...");
+        Terminal.WriteLine("Typ 'MENU' om naar het menu te gaan...");
         currentState = States.links;
     }
 
@@ -186,7 +264,8 @@ public class MyAdventure : MonoBehaviour
         Terminal.ClearScreen();
         Terminal.WriteLine("Je gaat op het geluid af en je ziet een figuur op je afkomen.");
         Terminal.WriteLine("Je word bang en je probeert weg te rennen maar je bent te langzaam.");
-        Terminal.WriteLine("Het beest krijgt je te pakken. Typ MENU om naar start te gaan...");
+        Terminal.WriteLine("Het beest krijgt je te pakken.");
+        Terminal.WriteLine("Typ 'MENU' om naar start te gaan...");
         currentState = States.eropaf;
     }
 
@@ -196,24 +275,77 @@ public class MyAdventure : MonoBehaviour
         Terminal.WriteLine("Je weet nu zeker dat je niet alleen bent.");
         Terminal.WriteLine("Je loopt door en je komt in een grote, ronde kamer met in het midden allemaal botten en opgedroogd bloed.");
         Terminal.WriteLine("Je kan nu onderzoeken of je kan weg gaan.");
-        Terminal.WriteLine("Typ ONDERZOEKEN of WEG...");
+        Terminal.WriteLine("Typ 'ONDERZOEKEN' of 'WEG'...");
         currentState = States.ervanweg;
     }
 
     void onderzoeken()
     {
         Terminal.ClearScreen();
+        Terminal.WriteLine("Je gaat onderzoeken en je ziet dat");
+        Terminal.WriteLine("er ook menselijke schedels tussen zitten.");
+        Terminal.WriteLine("Je raakt in paniek en je wilt weg.");
+        Terminal.WriteLine("Je hoort een geluid en je probeerd weg");
+        Terminal.WriteLine("te rennen maar het is te laat.");
+        Terminal.WriteLine("Er komt een groot monster op je af en");
+        Terminal.WriteLine("het verslint je.");
+        Terminal.WriteLine("Typ 'MENU' om opnieuw te beginnen...");
+        currentState = States.onderzoeken;
     }
 
     void weg()
     {
         Terminal.ClearScreen();
+        Terminal.WriteLine("Je rent zo hard mogelijk weg.");
+        Terminal.WriteLine("Achter je hoor je harde geluiden");
+        Terminal.WriteLine("en je bent blij dat je weg bent");
+        Terminal.WriteLine("gegaan. Je komt aan bij twee gangen");
+        Terminal.WriteLine("met twee borden. op de ene staat leven");
+        Terminal.WriteLine("en op de ander staat dood. Beslis welke");
+        Terminal.WriteLine("kant je opgaat.");
+        Terminal.WriteLine("Typ 'LEVEN' om daarheen te gaan...");
+        Terminal.WriteLine("Typ 'DOOD' om daarheen te gaan...");
+        currentState = States.weg;
+    }
+
+    void dood()
+    {
+        Terminal.ClearScreen();
+        Terminal.WriteLine("Je had gelijk en dood was de juiste");
+        Terminal.WriteLine("keuze. je ziet de uitgang en je rent");
+        Terminal.WriteLine("erop af. je doet de deur open, je");
+        Terminal.WriteLine("ziet een fel licht en je valt flauw.");
+        Terminal.WriteLine("Opeens word je wakker in je bed, maar");
+        Terminal.WriteLine("het voelde zo echt.");
+        Terminal.WriteLine("Typ 'VERDER' om verder te gaan...");
+        currentState = States.dood;
+    }
+
+    void leven()
+    {
+        Terminal.ClearScreen();
+        Terminal.WriteLine("Het was een val!!");
+        Terminal.WriteLine("Het monster staat voor je en");
+        Terminal.WriteLine("je probeerd terug te gaan,");
+        Terminal.WriteLine("maar het is gesloten. je kan");
+        Terminal.WriteLine("nergens heen en het beest");
+        Terminal.WriteLine("verslint je.");
+        Terminal.WriteLine("Typ 'MENU' om naar het menu te gaan...");
+        currentState = States.leven;
+    }
+
+    void eind()
+    {
+        Terminal.ClearScreen();
+        Terminal.WriteLine("Je hebt het gehaald!!!");
+        Terminal.WriteLine("Typ 'MENU' om opnieuw te beginnen...");
+        currentState = States.eind;
     }
 
     void menu()
     {
         Terminal.ClearScreen();
-        Terminal.WriteLine("type 'start' om te beginnen...");
+        Terminal.WriteLine("type 'START' om te beginnen...");
         currentState = States.start;
     }
 }
