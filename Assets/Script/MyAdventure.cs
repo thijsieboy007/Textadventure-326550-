@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class MyAdventure : MonoBehaviour
 {
-    private enum States
+   //Hier beginnen alle states
+   private enum States
     {
         start, 
         intro,
@@ -35,10 +37,12 @@ public class MyAdventure : MonoBehaviour
     }
 
     void OnUserInput(string input)
+    //Hier staat wat voor type de input is
     {
         switch (currentState)
         {
             case States.start:
+                //Dit is wat er kan gebeuren in de start state
             {
                 if (input == "start")
                 {
@@ -52,6 +56,7 @@ public class MyAdventure : MonoBehaviour
                 break;
 
             case States.intro:
+                //Dit is wat er kan gebeuren in de intro state
             {
                 if (input == "verder")
                 {
@@ -65,6 +70,7 @@ public class MyAdventure : MonoBehaviour
                 break;
 
             case States.verder:
+                //Dit is wat er kan gebeuren in de verder state
             {
                 if (input == "rechts")
                 {
@@ -82,6 +88,7 @@ public class MyAdventure : MonoBehaviour
                 break;
             
             case States.links:
+                //Dit is wat er kan gebeuren in de links state
             {
                 if (input == "menu")
                 {
@@ -95,6 +102,7 @@ public class MyAdventure : MonoBehaviour
                 break;
             
             case States.rechts:
+                //Dit is wat er kan gebeuren in de rechts state
             {
                 if (input == "eropaf")
                 {
@@ -112,6 +120,7 @@ public class MyAdventure : MonoBehaviour
                 break;
 
             case States.eropaf:
+                //Dit is wat er kan gebeuren in de eropaf state
             {
                 if (input == "menu")
                 {
@@ -125,6 +134,7 @@ public class MyAdventure : MonoBehaviour
                 break;
 
             case States.ervanweg:
+                //Dit is wat er kan gebeuren in de ervanweg state
             {
                 if (input == "onderzoeken")
                 {
@@ -143,6 +153,7 @@ public class MyAdventure : MonoBehaviour
                 break;
 
             case States.onderzoeken:
+                //Dit is wat er kan gebeuren in de onderzoeken state
             {
                 if (input == "menu")
                 {
@@ -155,6 +166,7 @@ public class MyAdventure : MonoBehaviour
             }
                 break;
             case States.weg:
+                //Dit is wat er kan gebeuren in de weg state
             {
                 if (input == "leven")
                 {
@@ -172,6 +184,7 @@ public class MyAdventure : MonoBehaviour
                 break;
             
             case States.leven:
+                //Dit is wat er kan gebeuren in de leven state
             {
                 if (input == "menu")
                 {
@@ -185,6 +198,7 @@ public class MyAdventure : MonoBehaviour
                 break;
 
             case States.dood:
+                //Dit is wat er kan gebeuren in de dood state
             {
                 if (input == "verder")
                 {
@@ -198,6 +212,7 @@ public class MyAdventure : MonoBehaviour
                 break;
 
             case States.eind:
+                //Dit is wat er kan gebeuren in de eind state
             {
                 if (input == "menu")
                 {
@@ -211,6 +226,7 @@ public class MyAdventure : MonoBehaviour
                 break;
         }
     }
+// bij de voids zie je wat er gezegt word als je de naam van de void aangeeft in een case
     void ShowMainMenu()
     {
         Terminal.ClearScreen();
